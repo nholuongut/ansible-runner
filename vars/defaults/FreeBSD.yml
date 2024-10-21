@@ -1,0 +1,11 @@
+---
+# FreeBSD vars/defaults for ansible_runner
+
+ar_pip_executable: /usr/local/bin/pip-3.8
+ar_packages:
+  - name: sysutils/py-ansible-runner
+ar_pip_requirements: []
+# ar_links_freebsd: []
+
+# EOF
+...

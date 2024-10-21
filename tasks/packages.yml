@@ -1,0 +1,59 @@
+---
+
+# FreeBSD
+- name: "packages: Install Ansible Runner FreeBSD packages"
+  block:
+    - name: "packages: Install Ansible Runner FreeBSD packages"
+      community.general.pkgng:
+        name: "{{ ar_packages|map(attribute='name')|list }}"
+      register: result
+      until: result is succeeded
+      retries: "{{ freebsd_install_retries }}"
+      delay: "{{ freebsd_install_delay }}"
+    - name: "packages: Debug FreeBSD packages"
+      ansible.builtin.debug:
+        var: result
+      when: ar_debug|bool
+  when:
+    - ansible_os_family == "FreeBSD"
+    - freebsd_install_method|lower == "packages"
+
+- name: "packages: Install Ansible Runner FreeBSD ports"
+  block:
+    - name: "packages: Install Ansible Runner FreeBSD ports"
+      community.general.portinstall:
+        name: "{{ item.name }}"
+        use_packages: "{{ freebsd_use_packages }}"
+      loop: "{{ ar_packages }}"
+      register: result
+      until: result is succeeded
+      retries: "{{ freebsd_install_retries }}"
+      delay: "{{ freebsd_install_delay }}"
+    - name: "packages: Debug FreeBSD ports"
+      ansible.builtin.debug:
+        var: result
+      when: ar_debug|bool
+  when:
+    - ansible_os_family == "FreeBSD"
+    - freebsd_install_method|lower == "ports"
+
+# Linux
+- name: "packages: Install Ansible Runner Linux packages"
+  block:
+    - name: "packages: Install Ansible Runner Linux packages"
+      ansible.builtin.package:
+        name: "{{ item.name }}"
+      loop: "{{ ar_packages }}"
+      register: result
+      until: result is succeeded
+      retries: "{{ linux_install_retries }}"
+      delay: "{{ linux_install_delay }}"
+    - name: "packages: Debug Linux"
+      ansible.builtin.debug:
+        var: result
+      when: ar_debug|bool
+  when:
+    - ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+
+# EOF
+...

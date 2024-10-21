@@ -1,0 +1,9 @@
+---
+
+- name: "config: configure ansible-runner"
+  ansible.builtin.debug:
+    msg: No config
+  when: ar_debug|bool
+
+# EOF
+...

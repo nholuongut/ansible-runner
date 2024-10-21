@@ -1,0 +1,39 @@
+---
+# defaults ansible_runner
+
+ar_pkg_install: false
+ar_pip_install: false
+ar_debug: false
+ar_backup_conf: false
+ar_sanity: false
+
+# FreeBSD
+freebsd_install_retries: 10
+freebsd_install_delay: 5
+freebsd_install_method: packages
+# freebsd_install_method: ports
+freebsd_use_packages: true
+
+# Linux
+linux_install_retries: 10
+linux_install_delay: 5
+
+# pip
+pip_install_retries: 10
+pip_install_delay: 5
+# ar_pip_extraagrs: '--user --upgrade'
+
+# Config
+ar_config: []
+
+# Links
+ar_links: []
+
+# Override OS specific variables. See tasks/vars.yml
+# ar_pip_executable_override: /usr/bin/pip4
+# ar_pip_packages_override:
+# - name: ansible-runner-devel
+# ar_pip_requirements_override: []
+
+# EOF
+...

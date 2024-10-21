@@ -1,0 +1,32 @@
+---
+
+- name: "vars: Declare mal_owner when undefined"
+  ansible.builtin.set_fact:
+    mal_owner: "{{ ansible_user_id }}"
+  when: mal_owner is undefined
+
+- name: "vars: Include OS vars"
+  block:
+    - name: "vars: Set variables for al_include_os_vars_path"
+      ansible.builtin.set_fact:
+        al_os_vars_path: "{{ role_path }}"
+    - name: "vars: Include OS vars"
+      ansible.builtin.include_role:
+        name: vbotka.ansible_lib
+        tasks_from: al_include_os_vars_path
+
+- name: "vars: Override ar_pip_executable"
+  ansible.builtin.set_fact:
+    ar_pip_executable: "{{ ar_pip_executable_override }}"
+  when: ar_pip_executable_override is defined
+- name: "vars: Override ar_pip_packages"
+  ansible.builtin.set_fact:
+    ar_pip_packages: "{{ ar_pip_packages_override }}"
+  when: ar_pip_packages_override is defined
+- name: "vars: Override ar_pip_requirements"
+  ansible.builtin.set_fact:
+    ar_pip_requirements: "{{ ar_pip_requirements_override }}"
+  when: ar_pip_requirements_override is defined
+
+# EOF
+...

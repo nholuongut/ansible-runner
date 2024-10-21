@@ -1,0 +1,60 @@
+---
+
+# [TODO] move test to sanity.yml
+- name: "pip: Test {{ ar_pip_executable }} exists"
+  ansible.builtin.stat:
+    path: "{{ ar_pip_executable }}"
+  register: result
+
+- name: "pip: Not exists {{ ar_pip_executable }}"
+  ansible.builtin.fail:
+    msg: "[ERROR] {{ ar_pip_executable }} does not exist."
+  when: not result.stat.exists
+
+- name: "pip: Install Ansible Runner pip packages for {{ ar_owner }}"
+  become_user: "{{ ar_owner }}"
+  become: true
+  changed_when: false  # Note 1.
+  ansible.builtin.pip:
+    name: "{{ item.name }}"
+    executable: "{{ ar_pip_executable }}"
+    extra_args: "{{ ar_pip_extraagrs|default(omit) }}"
+    version: "{{ item.version|default(omit) }}"
+    state: "{{ item.state|default(omit) }}"
+  loop: "{{ ar_packages }}"
+  register: result
+  until: result is succeeded
+  retries: "{{ pip_install_retries }}"
+  delay: "{{ pip_install_delay }}"
+
+- name: "pip: Debug pip packages"
+  ansible.builtin.debug:
+    var: result
+  when: ar_debug|bool
+
+- name: "pip: Install Ansible Runner pip requirements for {{ ar_owner }}"
+  become_user: "{{ ar_owner }}"
+  become: true
+  changed_when: false  # Note 1.
+  ansible.builtin.pip:
+    requirements: "{{ ar_pip_requirements }}"
+    executable: "{{ ar_pip_executable }}"
+    extra_args: "{{ pip_extraagrs|default(omit) }}"
+  loop: "{{ ar_pip_requirements }}"
+  register: result
+  until: result is succeeded
+  retries: "{{ pip_install_retries }}"
+  delay: "{{ pip_install_delay }}"
+  when: ar_pip_requirements|length > 0
+
+- name: "pip: Debug pip requirements"
+  ansible.builtin.debug:
+    var: result
+  when: ar_debug|bool
+
+# Note 1.
+# The pip module isn't always idempotent #28952
+# https://github.com/ansible/ansible/issues/28952
+
+# EOF
+...

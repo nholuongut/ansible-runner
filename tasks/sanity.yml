@@ -1,0 +1,12 @@
+---
+
+- name: "sanity: Debug"
+  ansible.builtin.debug:
+    msg: Not implemented yet.
+
+# [TODO]
+#
+# when: ar_pip_install exist: python3-setuptools, python3-pip
+
+# EOF
+...

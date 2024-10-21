@@ -1,0 +1,83 @@
+---
+mytasks:
+  - file: main.yml
+    link: main.yml
+    synopsis: |
+      Tasks of the playbook.
+    description: |
+      Description of the task.
+    lines: 1,2
+    seealso: []
+    note: []
+    warning: []
+  - file: config.yml
+    link: config.yml
+    synopsis: |
+      Configure config.
+    description: |
+      Description of the task.
+    lines: 1,2
+    seealso: []
+    note: []
+    warning: []
+  - file: debug.yml
+    link: debug.yml
+    synopsis: |
+      Configure debug.
+    description: |
+      Description of the task.
+    lines: 1,2
+    seealso: []
+    note: []
+    warning: []
+  - file: links.yml
+    link: links.yml
+    synopsis: |
+      Configure links.
+    description: |
+      Description of the task.
+    lines: 1,2
+    seealso: []
+    note: []
+    warning: []
+  - file: packages.yml
+    link: packages.yml
+    synopsis: |
+      Configure packages.
+    description: |
+      Description of the task.
+    lines: 1,2
+    seealso: []
+    note: []
+    warning: []
+  - file: pip.yml
+    link: pip.yml
+    synopsis: |
+      Configure pip.
+    description: |
+      Description of the task.
+    lines: 1,2
+    seealso: []
+    note: []
+    warning: []
+  - file: sanity.yml
+    link: sanity.yml
+    synopsis: |
+      Configure sanity.
+    description: |
+      Description of the task.
+    lines: 1,2
+    seealso: []
+    note: []
+    warning: []
+  - file: vars.yml
+    link: vars.yml
+    synopsis: |
+      Configure vars.
+    description: |
+      Description of the task.
+    lines: 1,2
+    seealso: []
+    note: []
+    warning: []
+...

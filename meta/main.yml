@@ -1,0 +1,28 @@
+---
+galaxy_info:
+  namespace: vbotka
+  role_name: ansible_runner
+  author: Vladimir Botka
+  description: Install and configure ansible-runner
+  company: https://botka.link
+  github_branch: master
+  license: BSD
+  min_ansible_version: "2.12"
+  platforms:
+    - name: FreeBSD
+      versions:
+        - 11.3
+        - 12.1
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+  galaxy_tags:
+    - ansible
+    - runner
+    - freebsd
+    - ubuntu
+dependencies: []
+collections:
+  - community.general
+...

@@ -1,0 +1,49 @@
+---
+
+- name: "debug: Ansible Runner"
+  vars:
+    msg: |-
+      ansible_architecture [{{ ansible_architecture }}]
+      ansible_os_family [{{ ansible_os_family }}]
+      ansible_distribution [{{ ansible_distribution }}]
+      ansible_distribution_major_version [{{ ansible_distribution_major_version }}]
+      ansible_distribution_version [{{ ansible_distribution_version }}]
+      ansible_distribution_release [{{ ansible_distribution_release }}]
+      ansible_python_version [{{ ansible_python_version }}]
+
+      ar_sanity [{{ ar_sanity }}]
+      ar_pkg_install [{{ ar_pkg_install }}]
+      ar_pip_install [{{ ar_pip_install }}]
+
+      freebsd_install_method [{{ freebsd_install_method }}]
+      freebsd_use_packages [{{ freebsd_use_packages }}]
+      freebsd_install_retries [{{ freebsd_install_retries }}]
+      freebsd_install_delay [{{ freebsd_install_delay }}]
+
+      linux_install_retries [{{ linux_install_retries }}]
+      linux_install_delay [{{ linux_install_delay }}]
+
+      pip_install_retries [{{ pip_install_retries }}]
+      pip_install_delay [{{ pip_install_delay }}]
+      ar_pip_executable [{{ ar_pip_executable }}]
+      ar_pip_extraagrs [{{ ar_pip_extraagrs|default('UNDEFINED') }}]
+
+      ansible_user_id [{{ ansible_user_id }}]
+
+      ar_owner [{{ ar_owner }}]
+      ar_backup_conf [{{ ar_backup_conf }}]
+
+      ar_packages
+      {{ ar_packages|to_nice_yaml }}
+      ar_pip_requirements
+      {{ ar_pip_requirements|to_nice_yaml }}
+      ar_links
+      {{ ar_links|to_nice_yaml }}
+      ar_config
+      {{ ar_config|to_nice_yaml }}
+
+  ansible.builtin.debug:
+    msg: "{{ '{}'.format(msg) }}"
+
+# EOF
+...
